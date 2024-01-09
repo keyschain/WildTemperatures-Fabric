@@ -16,7 +16,7 @@ public class TemperatureManager {
     public static void setTemperature(ServerPlayerEntity player, float temperature) {
         playerTemperatures.put(player, temperature);
 
-        // Send an update packet to the client for the specific player
+        // send an update packet to the client for the specific player
         TemperatureUpdatePacket.send(player, temperature);
     }
 

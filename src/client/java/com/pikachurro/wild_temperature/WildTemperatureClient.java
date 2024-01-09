@@ -2,8 +2,8 @@ package com.pikachurro.wild_temperature;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -11,7 +11,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.UUID;
-
 
 public class WildTemperatureClient implements ClientModInitializer {
 	public static final String MOD_ID = "wild_temperature";
@@ -36,14 +35,13 @@ public class WildTemperatureClient implements ClientModInitializer {
 
 	public static final Identifier UPDATE_PACKET_ID = new Identifier(MOD_ID, "update_temperature");
 
+	private static boolean hudRenderCallbackRegistered = false;
+	private static float currentTemperature = 0.0f;
 
-    @Override
+	@Override
 	public void onInitializeClient() {
 		initClient();
-		HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
-			// renderHUD(drawContext, NEUTRAL_TEXTURE, 1.0f);
-			// renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
-		});
+		registerHudRenderCallback();
 	}
 
 	public static void initClient() {
@@ -51,65 +49,44 @@ public class WildTemperatureClient implements ClientModInitializer {
 		ClientPlayNetworking.registerGlobalReceiver(TemperatureUpdatePacket.ID, (client, handler, buf, responseSender) -> {
 			UUID playerUuid = buf.readUuid();
 			float temperature = buf.readFloat();
+
 			// handle the received temperature update on the client
 			updateTemperatureHUD(playerUuid, temperature);
 		});
 	}
 
+	private static void registerHudRenderCallback() {
+
+		HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
+			if (currentTemperature > 1.6) {
+				renderOverlay(drawContext, EXTREME_HEAT_OVERLAY, 0.5f);
+				renderHUD(drawContext, EXTREME_HEAT_TEXTURE, 1.0f);
+			} else if (currentTemperature > 1.0 && currentTemperature <= 1.6) {
+				renderOverlay(drawContext, HOT_OVERLAY, 0.5f);
+				renderHUD(drawContext, HOT_TEXTURE, 1.0f);
+			} else if (currentTemperature > 0.7 && currentTemperature <= 1.0) {
+				renderOverlay(drawContext, WARM_OVERLAY, 0.5f);
+				renderHUD(drawContext, WARM_TEXTURE, 1.0f);
+			} else if (currentTemperature > 0.5 && currentTemperature <= 0.7) {
+				renderOverlay(drawContext, WARM_OVERLAY, 0f);
+				renderHUD(drawContext, NEUTRAL_TEXTURE, 1.0f);
+			}
+		});
+		hudRenderCallbackRegistered = true;
+
+	}
 	private static void updateTemperatureHUD(UUID playerUuid, float temperature) {
 		MinecraftClient.getInstance().execute(() -> {
-			ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
-			if (clientPlayerEntity != null) {
-				// Perform actions on the client player entity
 
-				// Extreme Cold
-				if (temperature <= 0.05){
-					HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
-						renderHUD(drawContext, EXTREME_COLD_TEXTURE, 1.0f);
-						// renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
-					});
-				}
-				// Cold
-				else if (temperature > 0.05 && temperature <= 0.25) {
-					HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
-						renderHUD(drawContext, COLD_TEXTURE, 1.0f);
-						// renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
-					});
-				}
-				// Breezy
-				else if (temperature > 0.25 && temperature <= 0.5) {
-					HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
-						renderHUD(drawContext, BREEZY_TEXTURE, 1.0f);
-						// renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
-					});
-				}
-				// Neutral
-				else if (temperature > 0.5 && temperature <= 0.7) {
-					HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
-						renderHUD(drawContext, NEUTRAL_TEXTURE, 1.0f);
-						// renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
-					});
-				}
-				// Warm
-				else if (temperature > 0.7 && temperature <= 1.0) {
-					HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
-						renderHUD(drawContext, WARM_TEXTURE, 1.0f);
-						// renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
-					});
-				}
-				// Hot
-				else if (temperature > 1.0 && temperature <= 1.6) {
-					HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
-						renderHUD(drawContext, HOT_TEXTURE, 1.0f);
-						// renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
-					});
-				}
-				// Extreme Heat
-				else if (temperature > 1.6) {
-					HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
-						renderHUD(drawContext, EXTREME_HEAT_TEXTURE, 1.0f);
-						// renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
-					});
+			ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
+
+			if (clientPlayerEntity != null) {
+				// perform actions on the client player entity
+
+				currentTemperature = temperature;
+
+				if (!hudRenderCallbackRegistered) {
+					registerHudRenderCallback();
 				}
 
 			}
@@ -118,7 +95,7 @@ public class WildTemperatureClient implements ClientModInitializer {
 
 	}
 
-	private void renderOverlay(DrawContext context, Identifier texture, float opacity) {
+	private static void renderOverlay(DrawContext context, Identifier texture, float opacity) {
 		int scaledWidth = context.getScaledWindowWidth();
 		int scaledHeight = context.getScaledWindowHeight();
 
@@ -129,6 +106,8 @@ public class WildTemperatureClient implements ClientModInitializer {
 		RenderSystem.depthMask(true);
 		RenderSystem.enableDepthTest();
 		context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+		RenderSystem.defaultBlendFunc();
+		RenderSystem.enableBlend();
 	}
 
 	private static void renderHUD(DrawContext context, Identifier texture, float opacity) {
@@ -136,18 +115,21 @@ public class WildTemperatureClient implements ClientModInitializer {
 		int i = scaledWidth / 2;
 		int scaledHeight = context.getScaledWindowHeight();
 
-		boolean leftHud = false;
+		boolean leftHandHud = false;
 
 		RenderSystem.disableDepthTest();
 		RenderSystem.depthMask(false);
 		context.setShaderColor(1.0f, 1.0f, 1.0f, opacity);
-		if (leftHud == true) {
+		if (leftHandHud == true) {
 			context.drawTexture(texture, i + 91 + 28 + 8, scaledHeight - 22, 0, 0.0f, 0.0f, 22, 22, 22, 22);
 		} else {
-			context.drawTexture(texture, i - 91 - 28 - 8, scaledHeight - 22, 0, 0.0f, 0.0f, 22, 22, 22, 22);
+			context.drawTexture(texture, i - 91 - 28 - 24, scaledHeight - 22, 0, 0.0f, 0.0f, 22, 22, 22, 22);
 		}
 		RenderSystem.depthMask(true);
 		RenderSystem.enableDepthTest();
 		context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+		RenderSystem.defaultBlendFunc();
+		RenderSystem.enableBlend();
 	}
+
 }
