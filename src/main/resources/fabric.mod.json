@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "wild_temperature",
+	"version": "${version}",
+	"name": "Wild Temperature",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://pikachurro.xyz/#minecraft",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/wild_temperature/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.pikachurro.wild_temperature.WildTemperature"
+		],
+		"client": [
+			"com.pikachurro.wild_temperature.WildTemperatureClient"
+		],
+		"fabric-datagen": [
+			"com.pikachurro.wild_temperature.WildTemperatureDataGenerator"
+		]
+	},
+	"mixins": [
+		"wild_temperature.mixins.json",
+		{
+			"config": "wild_temperature.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.3",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
