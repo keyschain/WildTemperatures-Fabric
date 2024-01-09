@@ -3,6 +3,7 @@ package com.pikachurro.wild_temperature;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.biome.Biome;
@@ -11,15 +12,16 @@ import net.minecraft.util.math.BlockPos;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 public class WildTemperature implements ModInitializer {
+	public static final String MOD_ID = "wild_temperature";
 	private boolean hasLogged = false;
-	public static final Logger LOGGER = LoggerFactory.getLogger("wild_temperature");
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
 
 		ServerTickEvents.END_WORLD_TICK.register(world -> {
-
 			// log the temperature every 30 seconds to console
 			if (!hasLogged && world.getTime() % (30 * 20) == 0) {  // 20 ticks per second, 30 seconds
 
@@ -33,7 +35,7 @@ public class WildTemperature implements ModInitializer {
 		});
 	}
 
-	private void logBiomeTemperature(PlayerEntity player) {
+	private void logBiomeTemperature(ServerPlayerEntity player) {
 
 		if (!(player instanceof ServerPlayerEntity)) {
 			return;
@@ -51,11 +53,14 @@ public class WildTemperature implements ModInitializer {
 		// get current biome at player position
 		Biome biome = serverWorld.getBiome(playerPos).value();
 
-		// get tempearture of players current biome
-		float biomeTemperature = biome.getTemperature();
+		// get temperature of players current biome
+		float currentPlayerTemperature = biome.getTemperature();
+
+		// set the temperature in the manager
+		TemperatureManager.setTemperature(player, currentPlayerTemperature);
 
 		// output string
-		LOGGER.info("Biome Temperature for " + player.getName().getString() + ": " + biomeTemperature + " at " + playerPos);
+		LOGGER.info("Biome Temperature for " + player.getName().getString() + ": " + currentPlayerTemperature + " at " + playerPos);
 	}
 
 

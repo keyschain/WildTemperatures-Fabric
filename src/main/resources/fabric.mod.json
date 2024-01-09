@@ -2,16 +2,16 @@
 	"schemaVersion": 1,
 	"id": "wild_temperature",
 	"version": "${version}",
-	"name": "Wild Temperature",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Wild Temperatures",
+	"description": "a temperature mod for minecraft that tries to use vanilla concepts. no ice packs :)",
 	"authors": [
-		"Me!"
+		"pikachurro"
 	],
 	"contact": {
 		"homepage": "https://pikachurro.xyz/#minecraft",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/pikachurr0/WildTemperatures/issues"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/wild_temperature/icon.png",
 	"environment": "*",
 	"entrypoints": {
