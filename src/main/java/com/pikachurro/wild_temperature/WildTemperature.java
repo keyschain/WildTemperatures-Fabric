@@ -56,22 +56,22 @@ public class WildTemperature implements ModInitializer {
 
 		// set the temperature in the manager if its different
 		if (currentTemperature != targetTemperature) {
-			// Gradually update the currentTemperature towards the targetTemperature
+			// gradually update the currentTemperature towards the targetTemperature
 			if (currentTemperature < targetTemperature) {
 				if (targetTemperature - currentTemperature <= 0.1f) {
 					currentTemperature = targetTemperature;
 				} else {
-					currentTemperature += 0.1f; // Adjust the increment value as needed
+					currentTemperature += 0.1f; // adjust the increment value as needed
 				}
 			} else {
 				if (currentTemperature - targetTemperature <= 0.1f) {
 					currentTemperature = targetTemperature;
 				} else {
-					currentTemperature -= 0.1f; // Adjust the decrement value as needed
+					currentTemperature -= 0.1f; // adjust the decrement value as needed
 				}
 			}
 		} else {
-			// Set the currentTemperature to match the targetTemperature
+			// set the currentTemperature to match the targetTemperature
 			currentTemperature = targetTemperature;
 		}
 		TemperatureManager.setTemperature(player, currentTemperature);

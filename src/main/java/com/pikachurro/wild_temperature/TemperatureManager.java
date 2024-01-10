@@ -10,9 +10,6 @@ public class TemperatureManager {
     private static final Map<ServerPlayerEntity, Float> playerTemperatures = new HashMap<>();
     public static final String MOD_ID = "wild_temperature";
 
-    public static final Identifier UPDATE_PACKET_ID = new Identifier(MOD_ID, "temperature_manager");
-
-
     public static void setTemperature(ServerPlayerEntity player, float temperature) {
         playerTemperatures.put(player, temperature);
 

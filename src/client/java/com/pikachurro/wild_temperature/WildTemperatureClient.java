@@ -33,10 +33,13 @@ public class WildTemperatureClient implements ClientModInitializer {
 	private static final Identifier EXTREME_HEAT_OVERLAY = new Identifier(MOD_ID, "textures/gui/extreme_heat_overlay.png");
 	private static final Identifier HEAT_DAMAGE_OVERLAY = new Identifier(MOD_ID, "textures/gui/heat_damage_overlay.png");
 
-	public static final Identifier UPDATE_PACKET_ID = new Identifier(MOD_ID, "update_temperature");
-
 	private static boolean hudRenderCallbackRegistered = false;
 	private static float currentTemperature = 0.0f;
+
+	static boolean leftHandHud = true;
+	static boolean nonDeadlyOverlays = true;
+	static boolean deadlyOverlays = true;
+	static boolean temperatureHUD = true;
 
 	@Override
 	public void onInitializeClient() {
@@ -58,18 +61,74 @@ public class WildTemperatureClient implements ClientModInitializer {
 	private static void registerHudRenderCallback() {
 
 		HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
+
 			if (currentTemperature > 1.6) {
-				renderOverlay(drawContext, EXTREME_HEAT_OVERLAY, 0.5f);
-				renderHUD(drawContext, EXTREME_HEAT_TEXTURE, 1.0f);
+
+				if (deadlyOverlays == true) {
+					renderOverlay(drawContext, EXTREME_HEAT_OVERLAY, 1.0f);
+				}
+
+				if (temperatureHUD == true) {
+					renderHUD(drawContext, EXTREME_HEAT_TEXTURE, 1.0f);
+				}
+
 			} else if (currentTemperature > 1.0 && currentTemperature <= 1.6) {
-				renderOverlay(drawContext, HOT_OVERLAY, 0.5f);
-				renderHUD(drawContext, HOT_TEXTURE, 1.0f);
+
+				if (nonDeadlyOverlays == true) {
+					renderOverlay(drawContext, HOT_OVERLAY, 1.0f);
+				}
+
+				if (temperatureHUD == true) {
+					renderHUD(drawContext, HOT_TEXTURE, 1.0f);
+				}
+
 			} else if (currentTemperature > 0.7 && currentTemperature <= 1.0) {
-				renderOverlay(drawContext, WARM_OVERLAY, 0.5f);
-				renderHUD(drawContext, WARM_TEXTURE, 1.0f);
+
+				if (nonDeadlyOverlays == true) {
+					renderOverlay(drawContext, WARM_OVERLAY, 1.0f);
+				}
+
+				if (temperatureHUD == true) {
+					renderHUD(drawContext, WARM_TEXTURE, 1.0f);
+				}
+
 			} else if (currentTemperature > 0.5 && currentTemperature <= 0.7) {
-				renderOverlay(drawContext, WARM_OVERLAY, 0f);
-				renderHUD(drawContext, NEUTRAL_TEXTURE, 1.0f);
+
+				if (nonDeadlyOverlays == true) {
+					renderOverlay(drawContext, WARM_OVERLAY, 0f);
+				}
+
+				if (temperatureHUD == true) {
+					renderHUD(drawContext, NEUTRAL_TEXTURE, 1.0f);
+				}
+
+			} else if (currentTemperature > 0.25 && currentTemperature <= 0.5) {
+
+				if (nonDeadlyOverlays == true) {
+					renderOverlay(drawContext, BREEZY_OVERLAY, 1.0f);
+				}
+
+				if (temperatureHUD == true) {
+					renderHUD(drawContext, BREEZY_TEXTURE, 1.0f);
+				}
+			} else if (currentTemperature > 0.05 && currentTemperature <= 0.25) {
+
+				if (nonDeadlyOverlays == true) {
+					renderOverlay(drawContext, COLD_OVERLAY, 1.0f);
+				}
+
+				if (temperatureHUD == true) {
+					renderHUD(drawContext, COLD_TEXTURE, 1.0f);
+				}
+			} else if (currentTemperature < 0.05) {
+
+				if (deadlyOverlays == true) {
+					renderOverlay(drawContext, EXTREME_COLD_OVERLAY, 1.0f);
+				}
+
+				if (temperatureHUD == true) {
+					renderHUD(drawContext, EXTREME_COLD_TEXTURE, 1.0f);
+				}
 			}
 		});
 		hudRenderCallbackRegistered = true;
@@ -99,15 +158,13 @@ public class WildTemperatureClient implements ClientModInitializer {
 		int scaledWidth = context.getScaledWindowWidth();
 		int scaledHeight = context.getScaledWindowHeight();
 
-		RenderSystem.disableDepthTest();
-		RenderSystem.depthMask(false);
-		context.setShaderColor(1.0f, 1.0f, 1.0f, opacity);
-		context.drawTexture(texture, 0, 0, -90, 0.0f, 0.0f, scaledWidth, scaledHeight, scaledWidth, scaledHeight);
-		RenderSystem.depthMask(true);
-		RenderSystem.enableDepthTest();
-		context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 		RenderSystem.defaultBlendFunc();
 		RenderSystem.enableBlend();
+		context.setShaderColor(1.0f, 1.0f, 1.0f, opacity);
+		context.drawTexture(texture, 0, 0, -90, 0.0f, 0.0f, scaledWidth, scaledHeight, scaledWidth, scaledHeight);
+		context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+		RenderSystem.disableBlend();
+		RenderSystem.defaultBlendFunc();
 	}
 
 	private static void renderHUD(DrawContext context, Identifier texture, float opacity) {
@@ -115,21 +172,17 @@ public class WildTemperatureClient implements ClientModInitializer {
 		int i = scaledWidth / 2;
 		int scaledHeight = context.getScaledWindowHeight();
 
-		boolean leftHandHud = false;
-
-		RenderSystem.disableDepthTest();
-		RenderSystem.depthMask(false);
+		RenderSystem.defaultBlendFunc();
+		RenderSystem.enableBlend();
 		context.setShaderColor(1.0f, 1.0f, 1.0f, opacity);
 		if (leftHandHud == true) {
 			context.drawTexture(texture, i + 91 + 28 + 8, scaledHeight - 22, 0, 0.0f, 0.0f, 22, 22, 22, 22);
 		} else {
-			context.drawTexture(texture, i - 91 - 28 - 24, scaledHeight - 22, 0, 0.0f, 0.0f, 22, 22, 22, 22);
+			context.drawTexture(texture, i - 91 - 28 - 30, scaledHeight - 22, 0, 0.0f, 0.0f, 22, 22, 22, 22);
 		}
-		RenderSystem.depthMask(true);
-		RenderSystem.enableDepthTest();
 		context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+		RenderSystem.disableBlend();
 		RenderSystem.defaultBlendFunc();
-		RenderSystem.enableBlend();
 	}
 
 }
