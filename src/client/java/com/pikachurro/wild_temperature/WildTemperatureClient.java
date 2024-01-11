@@ -12,9 +12,12 @@ import net.minecraft.client.MinecraftClient;
 
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class WildTemperatureClient implements ClientModInitializer {
 	public static final String MOD_ID = "wild_temperature";
-
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	private static final Identifier EXTREME_COLD_TEXTURE = new Identifier(MOD_ID, "textures/gui/extreme_cold.png");
 	private static final Identifier COLD_TEXTURE = new Identifier(MOD_ID, "textures/gui/cold.png");
 	private static final Identifier BREEZY_TEXTURE = new Identifier(MOD_ID, "textures/gui/breezy.png");
@@ -59,81 +62,65 @@ public class WildTemperatureClient implements ClientModInitializer {
 	}
 
 	private static void registerHudRenderCallback() {
-
-		HudRenderCallback.EVENT.register((DrawContext drawContext, float tickDelta) -> {
-
+		HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
 			if (currentTemperature > 1.6) {
-
-				if (deadlyOverlays == true) {
+				if (nonDeadlyOverlays && !TemperatureManager.isTakingTemperatureDamage) {
 					renderOverlay(drawContext, EXTREME_HEAT_OVERLAY, 1.0f);
+				} else if (TemperatureManager.isTakingTemperatureDamage && deadlyOverlays) {
+					renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
 				}
-
-				if (temperatureHUD == true) {
+				if (temperatureHUD) {
 					renderHUD(drawContext, EXTREME_HEAT_TEXTURE, 1.0f);
 				}
-
-			} else if (currentTemperature > 1.0 && currentTemperature <= 1.6) {
-
-				if (nonDeadlyOverlays == true) {
+			} else if (currentTemperature > 1.1) {
+				if (nonDeadlyOverlays) {
 					renderOverlay(drawContext, HOT_OVERLAY, 1.0f);
 				}
-
-				if (temperatureHUD == true) {
+				if (temperatureHUD) {
 					renderHUD(drawContext, HOT_TEXTURE, 1.0f);
 				}
-
-			} else if (currentTemperature > 0.7 && currentTemperature <= 1.0) {
-
-				if (nonDeadlyOverlays == true) {
+			} else if (currentTemperature > 0.8) {
+				if (nonDeadlyOverlays) {
 					renderOverlay(drawContext, WARM_OVERLAY, 1.0f);
 				}
-
-				if (temperatureHUD == true) {
+				if (temperatureHUD) {
 					renderHUD(drawContext, WARM_TEXTURE, 1.0f);
 				}
-
-			} else if (currentTemperature > 0.5 && currentTemperature <= 0.7) {
-
-				if (nonDeadlyOverlays == true) {
+			} else if (currentTemperature > 0.5) {
+				if (nonDeadlyOverlays) {
 					renderOverlay(drawContext, WARM_OVERLAY, 0f);
 				}
-
-				if (temperatureHUD == true) {
+				if (temperatureHUD) {
 					renderHUD(drawContext, NEUTRAL_TEXTURE, 1.0f);
 				}
-
-			} else if (currentTemperature > 0.25 && currentTemperature <= 0.5) {
-
-				if (nonDeadlyOverlays == true) {
+			} else if (currentTemperature > 0.25) {
+				if (nonDeadlyOverlays) {
 					renderOverlay(drawContext, BREEZY_OVERLAY, 1.0f);
 				}
-
-				if (temperatureHUD == true) {
+				if (temperatureHUD) {
 					renderHUD(drawContext, BREEZY_TEXTURE, 1.0f);
 				}
-			} else if (currentTemperature > 0.05 && currentTemperature <= 0.25) {
-
-				if (nonDeadlyOverlays == true) {
+			} else if (currentTemperature > 0.05) {
+				if (nonDeadlyOverlays) {
 					renderOverlay(drawContext, COLD_OVERLAY, 1.0f);
 				}
-
-				if (temperatureHUD == true) {
+				if (temperatureHUD) {
 					renderHUD(drawContext, COLD_TEXTURE, 1.0f);
 				}
-			} else if (currentTemperature < 0.05) {
-
-				if (deadlyOverlays == true) {
+			} else {
+				if (nonDeadlyOverlays && !TemperatureManager.isTakingTemperatureDamage) {
 					renderOverlay(drawContext, EXTREME_COLD_OVERLAY, 1.0f);
+				} else if (TemperatureManager.isTakingTemperatureDamage && deadlyOverlays) {
+					renderOverlay(drawContext, COLD_DAMAGE_OVERLAY, 1.0f);
 				}
-
-				if (temperatureHUD == true) {
+				if (temperatureHUD) {
 					renderHUD(drawContext, EXTREME_COLD_TEXTURE, 1.0f);
 				}
 			}
 		});
 		hudRenderCallbackRegistered = true;
-
 	}
+
 	private static void updateTemperatureHUD(UUID playerUuid, float temperature) {
 		MinecraftClient.getInstance().execute(() -> {
 
@@ -143,7 +130,6 @@ public class WildTemperatureClient implements ClientModInitializer {
 				// perform actions on the client player entity
 
 				currentTemperature = temperature;
-
 				if (!hudRenderCallbackRegistered) {
 					registerHudRenderCallback();
 				}

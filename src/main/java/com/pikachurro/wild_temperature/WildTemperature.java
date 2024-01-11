@@ -3,6 +3,11 @@ package com.pikachurro.wild_temperature;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.server.world.ServerWorld;
@@ -17,7 +22,10 @@ public class WildTemperature implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	private float targetTemperature = 0.0f;
 	private float currentTemperature = 0.0f;
+	Enchantment frostProtectionEnchantment = ModEnchantments.FROST_PROTECTION;
 
+
+	TemperatureManager temperatureManager = new TemperatureManager();
 
 
 	@Override
@@ -29,7 +37,12 @@ public class WildTemperature implements ModInitializer {
 				hasLoggedFirst = true;
 			}
 
-			world.getServer().getPlayerManager().getPlayerList().forEach(this::logBiomeTemperature);
+			world.getServer().getPlayerManager().getPlayerList().forEach(player -> {
+				logBiomeTemperature(player);
+				applyFrostProtection(player);
+				temperatureManager.applyTemperatureDamage(player);
+				ModEnchantments.registerModEnchantments();
+			});
 		});
 	}
 
@@ -77,6 +90,29 @@ public class WildTemperature implements ModInitializer {
 		TemperatureManager.setTemperature(player, currentTemperature);
 
 
-		//LOGGER.info("Current Temperature for " + player.getName().getString() + ": " + currentTemperature + " at " + playerPos + " and Target Temperature " + targetTemperature);
+		LOGGER.info("SERVER: Current Temperature for " + player.getName().getString() + ": " + currentTemperature + " at " + playerPos + " and Target Temperature " + targetTemperature);
 	}
+
+	private void applyFrostProtection(ServerPlayerEntity player) {
+		// get the player's equipped armor items
+		Iterable<ItemStack> armorItems = player.getInventory().armor;
+
+		// check each armor item for the Frost Protection enchantment
+		for (ItemStack armorItem : armorItems) {
+			if (EnchantmentHelper.getLevel(frostProtectionEnchantment, armorItem) > 0) {
+				// apply the frost protection effect
+				if (isInColdBiome(player)) {
+					player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20, 0));
+				}
+				break; // stop checking other armor items if one has the enchantment
+			}
+		}
+	}
+
+	private boolean isInColdBiome(ServerPlayerEntity player) {
+		// check if the biome temperature is below a certain threshold (e.g., 0.2f)
+		return currentTemperature < 0.2f;
+	}
+
+
 }
