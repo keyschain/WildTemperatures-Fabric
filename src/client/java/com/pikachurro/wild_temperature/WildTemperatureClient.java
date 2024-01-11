@@ -64,9 +64,9 @@ public class WildTemperatureClient implements ClientModInitializer {
 	private static void registerHudRenderCallback() {
 		HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
 			if (currentTemperature > 1.6) {
-				if (nonDeadlyOverlays && !TemperatureManager.isTakingTemperatureDamage) {
+				if (nonDeadlyOverlays && !TemperatureDamageManager.isTakingTemperatureDamage) {
 					renderOverlay(drawContext, EXTREME_HEAT_OVERLAY, 1.0f);
-				} else if (TemperatureManager.isTakingTemperatureDamage && deadlyOverlays) {
+				} else if (TemperatureDamageManager.isTakingTemperatureDamage && deadlyOverlays) {
 					renderOverlay(drawContext, HEAT_DAMAGE_OVERLAY, 1.0f);
 				}
 				if (temperatureHUD) {
@@ -107,10 +107,10 @@ public class WildTemperatureClient implements ClientModInitializer {
 				if (temperatureHUD) {
 					renderHUD(drawContext, COLD_TEXTURE, 1.0f);
 				}
-			} else {
-				if (nonDeadlyOverlays && !TemperatureManager.isTakingTemperatureDamage) {
+			} else if (currentTemperature <= 0.05){
+				if (nonDeadlyOverlays && !TemperatureDamageManager.isTakingTemperatureDamage) {
 					renderOverlay(drawContext, EXTREME_COLD_OVERLAY, 1.0f);
-				} else if (TemperatureManager.isTakingTemperatureDamage && deadlyOverlays) {
+				} else if (TemperatureDamageManager.isTakingTemperatureDamage && deadlyOverlays) {
 					renderOverlay(drawContext, COLD_DAMAGE_OVERLAY, 1.0f);
 				}
 				if (temperatureHUD) {
@@ -133,7 +133,6 @@ public class WildTemperatureClient implements ClientModInitializer {
 				if (!hudRenderCallbackRegistered) {
 					registerHudRenderCallback();
 				}
-
 			}
 			});
 

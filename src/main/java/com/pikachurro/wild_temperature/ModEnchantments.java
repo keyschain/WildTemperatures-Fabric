@@ -1,6 +1,5 @@
 package com.pikachurro.wild_temperature;
 
-import net.fabricmc.api.ModInitializer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

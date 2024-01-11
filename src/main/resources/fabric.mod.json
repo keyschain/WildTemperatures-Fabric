@@ -9,9 +9,10 @@
 	],
 	"contact": {
 		"homepage": "https://pikachurro.xyz/#minecraft",
-		"sources": "https://github.com/pikachurr0/WildTemperatures/issues"
+		"sources": "https://github.com/pikachurr0/WildTemperatures",
+		"issues" : "https://github.com/pikachurr0/WildTemperatures/issues"
 	},
-	"license": "MIT",
+	"license": "ARR",
 	"icon": "assets/wild_temperature/icon.png",
 	"environment": "*",
 	"entrypoints": {
