@@ -19,13 +19,13 @@ A temperature mod expanding on vanilla mechanics to make the game a bit more dif
 - Left handed mode
   
 # Quick Explainer
+
 - Extreme cold biomes cause cold damage and you will freeze to death, to avoid this wear at least 3 pieces of leather armor, enchant one piece of armor with Frost Protection.
 - Extreme heat biomes cause heat damage and you will burn to death, to avoid this wear at least 3 pieces of chainmail armor, or enchant one piece of armor with Fire Protection, or drink a fire resistance
 - The night in deserts are extremely cold.
 - Frost protection gives you the resistance effect if it's below 0.2 biome degrees (you can look on the vanilla wiki to find this :) (this also means nights in deserts)
 - Jumping in water protects you from heat (wild i know)
 - Blocks, torches, lava etc. do not cause temperature to change in 1.0 (this might change in the future who knows)
-
 - also important this is my first mod and first java project so the code is probably shit and is probably not fool proof, but it works :)
 
 # Dependencies
