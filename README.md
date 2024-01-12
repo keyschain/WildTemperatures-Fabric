@@ -1,7 +1,5 @@
 ![Logo](https://cdn.modrinth.com/data/ElQgDJsn/images/6b19645aa27e0ae06b0351d0e58000f0b6564f0a.png)
 
-
-## Badges
 [![modloader - Fabric](https://img.shields.io/badge/modloader-Fabric-orange?style=for-the-badge&logo=fabricmc)](https://fabricmc.net) ![minecraft - 1.20.1](https://img.shields.io/badge/minecraft-1.20.1-00aa33?style=for-the-badge) ![environment - Client and Server](https://img.shields.io/badge/environment-Client_and_Server-blue?style=for-the-badge) ![license - ARR](https://img.shields.io/badge/license-ARR-magenta?style=for-the-badge) ![Modrinth Downloads](https://img.shields.io/modrinth/dt/ElQgDJsn?style=for-the-badge&color=00cf40)
 
  A Minecraft temperature mod using mostly vanilla mechanics and concepts.
