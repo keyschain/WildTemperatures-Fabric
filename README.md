@@ -24,7 +24,9 @@ A temperature mod expanding on vanilla mechanics to make the game a bit more dif
 - The night in deserts are extremely cold.
 - Frost protection gives you the resistance effect if it's below 0.2 biome degrees (you can look on the vanilla wiki to find this :) (this also means nights in deserts)
 - Jumping in water protects you from heat (wild i know)
-- Blocks, lava etc. do not cause temperature to change in 1.0 
+- Blocks, torches, lava etc. do not cause temperature to change in 1.0 (this might change in the future who knows)
+
+- also important this is my first mod and first java project so the code is probably shit and is probably not fool proof, but it works :)
 
 # Dependencies
 Fabric loader 0.15.3
