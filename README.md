@@ -12,8 +12,7 @@ A temperature mod expanding on vanilla mechanics to make the game a bit more dif
 - No new items or blocks
 - Make the game a more challenging without being too annoying
 - Expand on temperature / weather ideas already in the game
-- New enchantment, Fire Protection counterpart called Frost Protectionmob
-- Protect against cold with leather or chainmail armor, or enchant your other armor with fire or froost protection
+- New enchantment, Fire Protection counterpart called Frost Protection
 - Temperature HUD and overlays
 - Configurable
 - Left handed mode
