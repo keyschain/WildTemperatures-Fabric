@@ -30,6 +30,7 @@ A temperature mod expanding on vanilla mechanics to make the game a bit more dif
 
 # Dependencies
 Fabric loader 0.15.3
+Fabric API
 
 # FAQ
 
