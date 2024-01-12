@@ -2,6 +2,7 @@ package com.pikachurro.wild_temperature;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.ItemStack;
@@ -37,17 +38,26 @@ public class TemperatureDamageManager {
 
     private static void doExtremeHeatDamage(ServerPlayerEntity player) {
 
+        // is in water
         if (RefactoredTemperatureManager.isInWater(player)) {
             isTakingTemperatureDamage = false;
             return;
         }
 
+        // enchanted armor with fire protection
         if (hasFireProtection(player)) {
             isTakingTemperatureDamage = false;
             return;
         }
 
+        // armor like chainmail
         if (hasHeatProtectionArmor(player)) {
+            isTakingTemperatureDamage = false;
+            return;
+        }
+
+        // potion of fire resistance
+        if (hasFireResistance(player)) {
             isTakingTemperatureDamage = false;
             return;
         }
@@ -58,11 +68,13 @@ public class TemperatureDamageManager {
 
     private static void doExtremeColdDamage(ServerPlayerEntity player) {
 
+        // enchanted armor with frost protection
         if (hasFrostProtection(player)) {
             isTakingTemperatureDamage = false;
             return;
         }
 
+        // armor like leather
         if (hasColdProtectionArmor(player)) {
             isTakingTemperatureDamage = false;
             return;
@@ -111,5 +123,8 @@ public class TemperatureDamageManager {
         return count >= 3;
     }
 
+    private static boolean hasFireResistance(ServerPlayerEntity player) {
+        return player.hasStatusEffect(StatusEffects.FIRE_RESISTANCE);
+    }
 
 }
