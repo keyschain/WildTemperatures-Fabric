@@ -4,7 +4,7 @@
 <!-- SVG version -->
 [![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/project/wild-temperatures) [![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)]()
 
- A Minecraft temperature mod using mostly vanilla mechanics and concepts.
+A temperature mod expanding on vanilla mechanics to make the game a bit more difficult but doesn't require learning complex new mechanics!
 
 
 
