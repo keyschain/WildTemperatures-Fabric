@@ -14,7 +14,7 @@ import static com.pikachurro.wild_temperature.WildTemperature.LOGGER;
 
 public class RefactoredTemperatureManager {
     static float playerTemperature;
-    static float oldTemperature;
+    static float transitionTimeTicks = 100; // 5 seconds
 
     public static BlockPos getPlayerPos(ServerPlayerEntity player) {
         // get current positon from player
@@ -45,21 +45,58 @@ public class RefactoredTemperatureManager {
     }
 
     public static void updatePlayerTemperature(ServerPlayerEntity player) {
+        float biomeTemperature = getBiomeTemperature(player);
 
-        if (isNight(player) && isInDesert(player)) {
+        if (isRaining(player) && biomeTemperature >= 0.6f) {
+            if (playerTemperature != 0.2f) {
+                float targetTemperature = 0.2f;
+                float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
+                playerTemperature += temperatureChangePerTick;
+
+                LOGGER.info("Player Temperature: " + playerTemperature);
+                TemperatureUpdatePacket.send(player); // send the temperature update to the client
+            }
+        } else if (isRaining(player) && biomeTemperature > 0.05f) {
             if (playerTemperature != 0.0f) {
-                playerTemperature = 0.0f;
+                float targetTemperature = 0.0f;
+                float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
+                playerTemperature += temperatureChangePerTick;
+
                 LOGGER.info("Player Temperature: " + playerTemperature);
                 TemperatureUpdatePacket.send(player); // send the temperature update to the client
             }
-        } else if (isNight(player) && !isInDesert(player) && getBiomeTemperature(player) >= 0.6f) {
+        } else if (isRaining(player) && biomeTemperature < 0.05f) {
+            if (playerTemperature != -0.9f) {
+                float targetTemperature = -0.9f;
+                float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
+                playerTemperature += temperatureChangePerTick;
+
+                LOGGER.info("Player Temperature: " + playerTemperature);
+                TemperatureUpdatePacket.send(player); // send the temperature update to the client
+            }
+        } else if (isNight(player) && isInDesert(player)) {
+            if (playerTemperature != 0.0f) {
+                float targetTemperature = 0.0f;
+                float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
+                playerTemperature += temperatureChangePerTick;
+
+                LOGGER.info("Player Temperature: " + playerTemperature);
+                TemperatureUpdatePacket.send(player); // send the temperature update to the client
+            }
+        } else if (isNight(player) && !isInDesert(player) && biomeTemperature >= 0.6f) {
             if (playerTemperature != 0.3f) {
-                playerTemperature = 0.3f;
+                float targetTemperature = 0.3f;
+                float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
+                playerTemperature += temperatureChangePerTick;
+
                 LOGGER.info("Player Temperature: " + playerTemperature);
                 TemperatureUpdatePacket.send(player); // send the temperature update to the client
             }
-        } else if (!isNight(player) && getBiomeTemperature(player) != playerTemperature) {
-            playerTemperature = getBiomeTemperature(player);
+        } else if (!isNight(player) && biomeTemperature != playerTemperature) {
+            float targetTemperature = biomeTemperature;
+            float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
+            playerTemperature += temperatureChangePerTick;
+
             LOGGER.info("Player Temperature: " + playerTemperature);
             TemperatureUpdatePacket.send(player); // send the temperature update to the client
         }}
@@ -91,4 +128,8 @@ public class RefactoredTemperatureManager {
         return false;
     }
 
+    public static boolean isRaining(ServerPlayerEntity player) {
+        ServerWorld serverWorld = getWorld(player);
+        return serverWorld.isRaining();
+    }
 }

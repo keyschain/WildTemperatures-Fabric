@@ -26,12 +26,6 @@ public class TemperatureUpdatePacket {
         buf.writeUuid(packet.playerUuid);
         buf.writeFloat(packet.temperature);
     }
-//
-//    public static TemperatureUpdatePacket fromPacketByteBuf(PacketByteBuf buf) {
-//        UUID playerUuid = buf.readUuid();
-//        float temperature = buf.readFloat();
-//        return new TemperatureUpdatePacket(playerUuid, temperature);
-//    }
 
     public static void send(ServerPlayerEntity player) {
         float temperature = RefactoredTemperatureManager.playerTemperature;
