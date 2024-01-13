@@ -14,6 +14,7 @@ A temperature mod expanding on vanilla mechanics to make the game a bit more dif
 - Expand on temperature / weather ideas already in the game
 - New enchantment, Fire Protection counterpart called Frost Protection
 - Temperature HUD and overlays
+- Chainmail armor recipe
 - Configurable
 - Left handed mode
   
@@ -29,7 +30,7 @@ A temperature mod expanding on vanilla mechanics to make the game a bit more dif
 
 # Dependencies
 Fabric loader 0.15.3
-Fabric API
+Fabric API 
 
 # FAQ
 
