@@ -1,4 +1,4 @@
-![Logo](https://cdn.modrinth.com/data/ElQgDJsn/images/6b19645aa27e0ae06b0351d0e58000f0b6564f0a.png)
+![Logo](https://cdn.modrinth.com/data/ElQgDJsn/images/abf9b0b63c169d0c356a063c072f4a60cebbcc2e.png)
 
 [![modloader - Fabric](https://img.shields.io/badge/modloader-Fabric-orange?style=for-the-badge&logo=fabricmc)](https://fabricmc.net) ![Minecraft - 1.20.1 / 1.20.4](https://img.shields.io/badge/Minecraft-1.20.1_%2F_1.20.4-2ea44f?style=for-the-badge) ![environment - Client and Server](https://img.shields.io/badge/environment-Client_and_Server-blue?style=for-the-badge) ![license - ARR](https://img.shields.io/badge/license-ARR-magenta?style=for-the-badge) ![Modrinth Downloads](https://img.shields.io/modrinth/dt/ElQgDJsn?style=for-the-badge&color=00cf40)
 <!-- SVG version -->
