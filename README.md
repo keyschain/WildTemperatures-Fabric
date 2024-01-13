@@ -4,9 +4,7 @@
 <!-- SVG version -->
 [![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/project/wild-temperatures) [![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)]()
 
- A Minecraft temperature mod using mostly vanilla mechanics and concepts.
-
-
+A temperature mod expanding on vanilla mechanics to make the game a bit more difficult but doesn't require learning complex new mechanics!
 
 # Features
 
@@ -14,12 +12,24 @@
 - No new items or blocks
 - Make the game a more challenging without being too annoying
 - Expand on temperature / weather ideas already in the game
-- New enchantment, Fire Protection counterpart called Frost Protectionmob
-- Protect against cold with leather or chainmail armor, or enchant your other armor with fire or froost protection
+- New enchantment, Fire Protection counterpart called Frost Protection
 - Temperature HUD and overlays
 - Configurable
 - Left handed mode
+  
+# Quick Explainer
 
+- Extreme cold biomes cause cold damage and you will freeze to death, to avoid this wear at least 3 pieces of leather armor, enchant one piece of armor with Frost Protection.
+- Extreme heat biomes cause heat damage and you will burn to death, to avoid this wear at least 3 pieces of chainmail armor, or enchant one piece of armor with Fire Protection, or drink a fire resistance
+- The night in deserts are extremely cold.
+- Frost protection gives you the resistance effect if it's below 0.2 biome degrees (you can look on the vanilla wiki to find this :) (this also means nights in deserts)
+- Jumping in water protects you from heat (wild i know)
+- Blocks, torches, lava etc. do not cause temperature to change in 1.0 (this might change in the future who knows)
+- also important this is my first mod and first java project so the code is probably shit and is probably not fool proof, but it works :)
+
+# Dependencies
+Fabric loader 0.15.3
+Fabric API
 
 # FAQ
 
