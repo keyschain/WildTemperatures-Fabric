@@ -1,3 +1,16 @@
 {
-  "enchantment.wild_temperature.frost_protection": "Frost Protection"
+  "enchantment.wild_temperature.frost_protection": "Frost Protection",
+  "text.config.wild_temperature_config.title": "Wild Temperature Configuration",
+  "text.config.wild_temperature_config.option.doDebugLogs": "Debug logs",
+  "text.config.wild_temperature_config.option.transitionTimeTicks": "Temperature Transition Time (Ticks)",
+  "text.config.wild_temperature_config.option.EXTREME_HEAT_THRESHOLD": "Extreme Heat Threshold",
+  "text.config.wild_temperature_config.option.EXTREME_COLD_THRESHOLD": "Extreme Cold Threshold",
+  "text.config.wild_temperature_config.option.EXTREME_HEAT_DAMAGE": "Extreme Heat Damage",
+  "text.config.wild_temperature_config.option.EXTREME_COLD_DAMAGE": "Extreme Cold Damage",
+  "text.config.wild_temperature_config.section.clientSide": "Client Side Configuration",
+  "text.config.wild_temperature_config.option.leftHandHud": "Left hand HUD",
+  "text.config.wild_temperature_config.option.nonDeadlyOverlays": "Display Non-Deadly Overlays",
+  "text.config.wild_temperature_config.option.deadlyOverlays": "Display Deadly Overlays",
+  "text.config.wild_temperature_config.option.temperatureHUD": "Display Temperature Gauge"
+
 }

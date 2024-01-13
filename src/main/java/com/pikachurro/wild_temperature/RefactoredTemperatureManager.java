@@ -17,6 +17,8 @@ import static com.pikachurro.wild_temperature.WildTemperature.LOGGER;
 public class RefactoredTemperatureManager {
     static float playerTemperature;
     public static float transitionTimeTicks = CONFIG.transitionTimeTicks();
+    public static boolean doDebugLogs = CONFIG.doDebugLogs();
+
     public static BlockPos getPlayerPos(ServerPlayerEntity player) {
         // get current positon from player
         int playerX = (int) player.getX();
@@ -54,7 +56,9 @@ public class RefactoredTemperatureManager {
                 float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
                 playerTemperature += temperatureChangePerTick;
 
-                LOGGER.info("Player Temperature: " + playerTemperature);
+                if (doDebugLogs) {
+                    LOGGER.info("Player Temperature: " + playerTemperature);
+                }
                 TemperatureUpdatePacket.send(player); // send the temperature update to the client
             }
         } else if (isRaining(player) && biomeTemperature > 0.05f) {
@@ -63,8 +67,9 @@ public class RefactoredTemperatureManager {
                 float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
                 playerTemperature += temperatureChangePerTick;
 
-                LOGGER.info("Player Temperature: " + playerTemperature);
-                TemperatureUpdatePacket.send(player); // send the temperature update to the client
+                if (doDebugLogs) {
+                    LOGGER.info("Player Temperature: " + playerTemperature);
+                }                TemperatureUpdatePacket.send(player); // send the temperature update to the client
             }
         } else if (isRaining(player) && biomeTemperature < 0.05f) {
             if (playerTemperature != -0.9f) {
@@ -72,8 +77,9 @@ public class RefactoredTemperatureManager {
                 float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
                 playerTemperature += temperatureChangePerTick;
 
-                LOGGER.info("Player Temperature: " + playerTemperature);
-                TemperatureUpdatePacket.send(player); // send the temperature update to the client
+                if (doDebugLogs) {
+                    LOGGER.info("Player Temperature: " + playerTemperature);
+                }                TemperatureUpdatePacket.send(player); // send the temperature update to the client
             }
         } else if (isNight(player) && isInDesert(player)) {
             if (playerTemperature != 0.0f) {
@@ -81,8 +87,9 @@ public class RefactoredTemperatureManager {
                 float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
                 playerTemperature += temperatureChangePerTick;
 
-                LOGGER.info("Player Temperature: " + playerTemperature);
-                TemperatureUpdatePacket.send(player); // send the temperature update to the client
+                if (doDebugLogs) {
+                    LOGGER.info("Player Temperature: " + playerTemperature);
+                }                TemperatureUpdatePacket.send(player); // send the temperature update to the client
             }
         } else if (isNight(player) && !isInDesert(player) && biomeTemperature >= 0.6f) {
             if (playerTemperature != 0.3f) {
@@ -90,16 +97,18 @@ public class RefactoredTemperatureManager {
                 float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
                 playerTemperature += temperatureChangePerTick;
 
-                LOGGER.info("Player Temperature: " + playerTemperature);
-                TemperatureUpdatePacket.send(player); // send the temperature update to the client
+                if (doDebugLogs) {
+                    LOGGER.info("Player Temperature: " + playerTemperature);
+                }                TemperatureUpdatePacket.send(player); // send the temperature update to the client
             }
         } else if (!isNight(player) && biomeTemperature != playerTemperature) {
             float targetTemperature = biomeTemperature;
             float temperatureChangePerTick = (targetTemperature - playerTemperature) / transitionTimeTicks;
             playerTemperature += temperatureChangePerTick;
 
-            LOGGER.info("Player Temperature: " + playerTemperature);
-            TemperatureUpdatePacket.send(player); // send the temperature update to the client
+            if (doDebugLogs) {
+                LOGGER.info("Player Temperature: " + playerTemperature);
+            }            TemperatureUpdatePacket.send(player); // send the temperature update to the client
         }}
 
 
