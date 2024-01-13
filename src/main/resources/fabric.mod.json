@@ -3,7 +3,7 @@
 	"id": "wild_temperature",
 	"version": "${version}",
 	"name": "Wild Temperatures",
-	"description": "a temperature mod for minecraft that tries to use vanilla concepts. no ice packs :)",
+	"description": "A temperature mod expanding on vanilla mechanics to make the game a bit more difficult but doesn't require learning complex new mechanics!",
 	"authors": [
 		"pikachurro"
 	],

@@ -10,12 +10,13 @@ import net.minecraft.world.biome.Biome;
 
 import java.util.Objects;
 
+import static com.pikachurro.wild_temperature.WildTemperature.CONFIG;
 import static com.pikachurro.wild_temperature.WildTemperature.LOGGER;
+
 
 public class RefactoredTemperatureManager {
     static float playerTemperature;
-    static float transitionTimeTicks = 100; // 5 seconds
-
+    public static float transitionTimeTicks = CONFIG.transitionTimeTicks();
     public static BlockPos getPlayerPos(ServerPlayerEntity player) {
         // get current positon from player
         int playerX = (int) player.getX();
@@ -117,6 +118,7 @@ public class RefactoredTemperatureManager {
         return isInWater;
     }
 
+    // this is a terrifying method but it works...
     public static boolean isInDesert(ServerPlayerEntity player) {
         BlockPos playerPos = getPlayerPos(player);
         ServerWorld serverWorld = getWorld(player);

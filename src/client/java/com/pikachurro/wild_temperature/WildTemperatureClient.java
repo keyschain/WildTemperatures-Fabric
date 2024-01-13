@@ -15,6 +15,8 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.pikachurro.wild_temperature.WildTemperature.CONFIG;
+
 public class WildTemperatureClient implements ClientModInitializer {
 	public static final String MOD_ID = "wild_temperature";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -39,10 +41,11 @@ public class WildTemperatureClient implements ClientModInitializer {
 	private static boolean hudRenderCallbackRegistered = false;
 	private static float currentTemperature = 0.0f;
 
-	static boolean leftHandHud = true;
-	static boolean nonDeadlyOverlays = true;
-	static boolean deadlyOverlays = true;
-	static boolean temperatureHUD = true;
+	public static boolean leftHandHud = CONFIG.leftHandHud();
+	public static boolean nonDeadlyOverlays = CONFIG.nonDeadlyOverlays();
+	public static boolean deadlyOverlays = CONFIG.deadlyOverlays();
+	public static boolean temperatureHUD = CONFIG.temperatureHUD();
+
 
 	@Override
 	public void onInitializeClient() {
@@ -135,8 +138,6 @@ public class WildTemperatureClient implements ClientModInitializer {
 				}
 			}
 			});
-
-
 	}
 
 	private static void renderOverlay(DrawContext context, Identifier texture, float opacity) {

@@ -8,14 +8,14 @@ import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import static com.pikachurro.wild_temperature.WildTemperature.CONFIG;
+
 public class TemperatureDamageManager {
     public static boolean isTakingTemperatureDamage = false;
-
-    private static final float EXTREME_HEAT_THRESHOLD = 1.98f;
-    private static final float EXTREME_COLD_THRESHOLD = 0.07f;
-
-    private static final float EXTREME_HEAT_DAMAGE = 1;
-    private static final float EXTREME_COLD_DAMAGE = 1;
+    public static float EXTREME_HEAT_THRESHOLD = CONFIG.EXTREME_HEAT_THRESHOLD();
+    public static final float EXTREME_COLD_THRESHOLD = CONFIG.EXTREME_COLD_THRESHOLD();
+    public static final float EXTREME_HEAT_DAMAGE = CONFIG.EXTREME_HEAT_DAMAGE();
+    public static final float EXTREME_COLD_DAMAGE = CONFIG.EXTREME_COLD_DAMAGE();
 
     public static void applyTemperatureDamage(ServerPlayerEntity player) {
         float temperature = RefactoredTemperatureManager.playerTemperature;

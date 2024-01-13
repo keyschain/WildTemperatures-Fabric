@@ -13,11 +13,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.pikachurro.wild_temperature.WildTemperaturesConfig;
 public class WildTemperature implements ModInitializer {
 	public static final String MOD_ID = "wild_temperature";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	Enchantment frostProtectionEnchantment = ModEnchantments.FROST_PROTECTION;
-
+	public static final WildTemperaturesConfig CONFIG = WildTemperaturesConfig.createAndLoad();
 	@Override
 	public void onInitialize() {
 
@@ -40,7 +41,7 @@ public class WildTemperature implements ModInitializer {
 			if (EnchantmentHelper.getLevel(frostProtectionEnchantment, armorItem) > 0) {
 				// apply the frost protection effect
 				if (isInExtremeColdBiome(player)) {
-					player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20, 0));
+					player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20, 0, false, false));
 				}
 				break; // stop checking other armor items if one has the enchantment
 			}
