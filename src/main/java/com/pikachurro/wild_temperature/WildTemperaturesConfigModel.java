@@ -15,13 +15,13 @@ public class WildTemperaturesConfigModel {
     public float transitionTimeTicks = 300; // 15 seconds
 
     // damage manager config
-    public float EXTREME_HEAT_THRESHOLD = 1.98f;
-    public float EXTREME_COLD_THRESHOLD = 0.07f;
+    public float EXTREME_HEAT_THRESHOLD = 1.6f;
+    public float EXTREME_COLD_THRESHOLD = 0.059f;
     public float EXTREME_HEAT_DAMAGE = 1;
     public float EXTREME_COLD_DAMAGE = 1;
     @SectionHeader("clientSide")
     // client config
-    public boolean leftHandHud = true;
+    public boolean leftHandHud = false;
     public boolean nonDeadlyOverlays = true;
     public boolean deadlyOverlays = true;
     public boolean temperatureHUD = true;
