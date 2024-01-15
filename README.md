@@ -64,3 +64,6 @@ this is my first mod so yeah, however i might consider adding better support in 
 
 again the basics should work, but stuff like cold nights in a certain biome etc is impossible
 the enchantment should be fine though since it takes the current biome temperature into account
+
+### License
+The GNU GPLv3 lets people do almost anything they want with this project, except distributing closed source versions. If you do use this, make sure to disclose the source, have a copy of the license and copyright notice, use the same license, and changes made must be documented. For more information read the LICENSE file on the github.
