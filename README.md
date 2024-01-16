@@ -1,6 +1,6 @@
 ![Logo](https://cdn.modrinth.com/data/ElQgDJsn/images/abf9b0b63c169d0c356a063c072f4a60cebbcc2e.png)
 
-[![modloader - Fabric](https://img.shields.io/badge/modloader-Fabric-orange?style=for-the-badge&logo=fabricmc)](https://fabricmc.net) ![Minecraft - 1.20.1 / 1.20.4](https://img.shields.io/badge/Minecraft-1.20.1_%2F_1.20.4-2ea44f?style=for-the-badge) ![environment - Client and Server](https://img.shields.io/badge/environment-Client_and_Server-blue?style=for-the-badge) [![License - GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-805fa0?style=for-the-badge)](https://) ![Modrinth Downloads](https://img.shields.io/modrinth/dt/ElQgDJsn?style=for-the-badge&color=00cf40)
+![MODLOADER - FABRIC, QUILT COMPATIBLE](https://img.shields.io/badge/MODLOADER-FABRIC%2C_QUILT_COMPATIBLE-4a9574?style=for-the-badge) ![Minecraft - 1.20.1 / 1.20.4](https://img.shields.io/badge/Minecraft-1.20.1_%2F_1.20.4-2ea44f?style=for-the-badge) ![environment - Client and Server](https://img.shields.io/badge/environment-Client_and_Server-blue?style=for-the-badge) [![License - GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-805fa0?style=for-the-badge)](https://) ![Modrinth Downloads](https://img.shields.io/modrinth/dt/ElQgDJsn?style=for-the-badge&color=00cf40)
 <!-- SVG version -->
 [![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/project/wild-temperatures) [![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)]()
 
