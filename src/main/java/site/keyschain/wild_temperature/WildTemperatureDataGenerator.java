@@ -1,4 +1,4 @@
-package com.pikachurro.wild_temperature;
+package site.keyschain.wild_temperature;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;

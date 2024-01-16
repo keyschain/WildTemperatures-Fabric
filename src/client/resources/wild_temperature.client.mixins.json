@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "com.pikachurro.wild_temperature.mixin.client",
+	"package": "site.keyschain.wild_temperature.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
 		"ExampleClientMixin"

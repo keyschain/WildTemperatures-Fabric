@@ -1,14 +1,10 @@
-package com.pikachurro.wild_temperature;
+package site.keyschain.wild_temperature.temperature;
 
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterials;
-import net.minecraft.item.ItemStack;
+import static site.keyschain.wild_temperature.WildTemperature.CONFIG;
+import static site.keyschain.wild_temperature.temperature.EnvironmentChecks.isInWater;
+import static site.keyschain.wild_temperature.temperature.EquipmentChecks.*;
+
 import net.minecraft.server.network.ServerPlayerEntity;
-
-import static com.pikachurro.wild_temperature.WildTemperature.CONFIG;
 
 public class TemperatureDamageManager {
     public static boolean isTakingTemperatureDamage = false;
@@ -18,7 +14,7 @@ public class TemperatureDamageManager {
     public static final float EXTREME_COLD_DAMAGE = CONFIG.EXTREME_COLD_DAMAGE();
 
     public static void applyTemperatureDamage(ServerPlayerEntity player) {
-        float temperature = RefactoredTemperatureManager.playerTemperature;
+        float temperature = TemperatureManager.playerTemperature;
 
         boolean extremeHeat = temperature >= EXTREME_HEAT_THRESHOLD;
         boolean extremeCold = temperature <= EXTREME_COLD_THRESHOLD;
@@ -39,7 +35,7 @@ public class TemperatureDamageManager {
     private static void doExtremeHeatDamage(ServerPlayerEntity player) {
 
         // is in water
-        if (RefactoredTemperatureManager.isInWater(player)) {
+        if (isInWater(player)) {
             isTakingTemperatureDamage = false;
             return;
         }
@@ -83,48 +79,4 @@ public class TemperatureDamageManager {
         player.damage(player.getWorld().getDamageSources().freeze(), EXTREME_COLD_DAMAGE);
         isTakingTemperatureDamage = true;
     }
-
-    private static boolean hasFireProtection(ServerPlayerEntity player) {
-        for (ItemStack armor : player.getArmorItems()) {
-            if (EnchantmentHelper.getLevel(Enchantments.FIRE_PROTECTION, armor) > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean hasFrostProtection(ServerPlayerEntity player) {
-        for (ItemStack armor : player.getArmorItems()) {
-            if (EnchantmentHelper.getLevel(ModEnchantments.FROST_PROTECTION, armor) > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean hasHeatProtectionArmor(ServerPlayerEntity player){
-        int count = 0;
-        for (ItemStack armor : player.getArmorItems()) {
-            if (armor.getItem() instanceof ArmorItem && ((ArmorItem) armor.getItem()).getMaterial() == ArmorMaterials.CHAIN) {
-                count++;
-            }
-        }
-        return count >= 3;
-    }
-
-
-    private static boolean hasColdProtectionArmor(ServerPlayerEntity player) {
-        int count = 0;
-        for (ItemStack armor : player.getArmorItems()) {
-            if (armor.getItem() instanceof ArmorItem && ((ArmorItem) armor.getItem()).getMaterial() == ArmorMaterials.LEATHER) {
-                count++;
-            }
-        }
-        return count >= 3;
-    }
-
-    private static boolean hasFireResistance(ServerPlayerEntity player) {
-        return player.hasStatusEffect(StatusEffects.FIRE_RESISTANCE);
-    }
-
 }

@@ -1,6 +1,6 @@
-![Logo](https://cdn.modrinth.com/data/ElQgDJsn/images/6b19645aa27e0ae06b0351d0e58000f0b6564f0a.png)
+![Logo](https://cdn.modrinth.com/data/ElQgDJsn/images/abf9b0b63c169d0c356a063c072f4a60cebbcc2e.png)
 
-[![modloader - Fabric](https://img.shields.io/badge/modloader-Fabric-orange?style=for-the-badge&logo=fabricmc)](https://fabricmc.net) ![Minecraft - 1.20.1 / 1.20.4](https://img.shields.io/badge/Minecraft-1.20.1_%2F_1.20.4-2ea44f?style=for-the-badge) ![environment - Client and Server](https://img.shields.io/badge/environment-Client_and_Server-blue?style=for-the-badge) ![license - ARR](https://img.shields.io/badge/license-ARR-magenta?style=for-the-badge) ![Modrinth Downloads](https://img.shields.io/modrinth/dt/ElQgDJsn?style=for-the-badge&color=00cf40)
+[![modloader - Fabric](https://img.shields.io/badge/modloader-Fabric-orange?style=for-the-badge&logo=fabricmc)](https://fabricmc.net) ![Minecraft - 1.20.1 / 1.20.4](https://img.shields.io/badge/Minecraft-1.20.1_%2F_1.20.4-2ea44f?style=for-the-badge) ![environment - Client and Server](https://img.shields.io/badge/environment-Client_and_Server-blue?style=for-the-badge) [![License - GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-805fa0?style=for-the-badge)](https://) ![Modrinth Downloads](https://img.shields.io/modrinth/dt/ElQgDJsn?style=for-the-badge&color=00cf40)
 <!-- SVG version -->
 [![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/project/wild-temperatures) [![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)]()
 
@@ -17,7 +17,7 @@ A temperature mod expanding on vanilla mechanics to make the game a bit more dif
 - Chainmail armor recipe
 - Configurable
 - Left handed mode
-  
+
 # Quick Explainer
 
 - Extreme cold biomes cause cold damage and you will freeze to death, to avoid this wear at least 3 pieces of leather armor, enchant one piece of armor with Frost Protection.
@@ -30,14 +30,14 @@ A temperature mod expanding on vanilla mechanics to make the game a bit more dif
 
 # Dependencies
 Fabric loader 0.15.3
-Fabric API 
+Fabric API
 owo-lib
 
 # FAQ
 
 ### **What do you mean with vanilla mechanics and concepts**
 
-#### best explanation is giving some examples: 
+#### best explanation is giving some examples:
 
 vanilla already has a mechanic for freezing with powdered snow, so i try to expand upon that in ways like this: wearing leather against the cold, freezing when you are in a extremely cold biome.
 
@@ -49,7 +49,7 @@ vanilla doesn't really have a counterpart mechanic for that (aside from being on
 
 vanilla already has fire protection of course, which you can use to protect yourself against extreme heat in this mod, however there was no counterpart for the cold.
 
-so i added frost protection. but when i added it i realised the enchantment had no functionality outside extreme cold protection. since there are no ice mobs or ice attacks in the game it felt weird to just make it an exact replica of fire protection but for frost. 
+so i added frost protection. but when i added it i realised the enchantment had no functionality outside extreme cold protection. since there are no ice mobs or ice attacks in the game it felt weird to just make it an exact replica of fire protection but for frost.
 
 so instead ot make it a bit more useful i added the mechanic that if you are wearing a piece of armor with cold protection in an extremely cold biome (nights in the desert count too) you receive the resistance effect!
 
@@ -64,3 +64,6 @@ this is my first mod so yeah, however i might consider adding better support in 
 
 again the basics should work, but stuff like cold nights in a certain biome etc is impossible
 the enchantment should be fine though since it takes the current biome temperature into account
+
+### License
+The GNU GPLv3 lets people do almost anything they want with this project, except distributing closed source versions. If you do use this, make sure to disclose the source, have a copy of the license and copyright notice, use the same license, and changes made must be documented. For more information read the LICENSE file on the github.

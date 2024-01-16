@@ -1,9 +1,10 @@
-package com.pikachurro.wild_temperature;
+package site.keyschain.wild_temperature.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import site.keyschain.wild_temperature.enchantment.FrostProtectionEnchantment;
 
 public class ModEnchantments {
 

@@ -1,4 +1,4 @@
-package com.pikachurro.wild_temperature;
+package site.keyschain.wild_temperature;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -14,8 +14,10 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import site.keyschain.wild_temperature.networking.TemperatureUpdatePacket;
+import site.keyschain.wild_temperature.temperature.TemperatureDamageManager;
 
-import static com.pikachurro.wild_temperature.WildTemperature.CONFIG;
+import static site.keyschain.wild_temperature.WildTemperature.CONFIG;
 
 public class WildTemperatureClient implements ClientModInitializer {
 	public static final String MOD_ID = "wild_temperature";
@@ -103,14 +105,14 @@ public class WildTemperatureClient implements ClientModInitializer {
 				if (temperatureHUD) {
 					renderHUD(drawContext, BREEZY_TEXTURE, 1.0f);
 				}
-			} else if (currentTemperature > 0.05) {
+			} else if (currentTemperature > 0.055) {
 				if (nonDeadlyOverlays) {
 					renderOverlay(drawContext, COLD_OVERLAY, 1.0f);
 				}
 				if (temperatureHUD) {
 					renderHUD(drawContext, COLD_TEXTURE, 1.0f);
 				}
-			} else if (currentTemperature <= 0.05){
+			} else if (currentTemperature <= 0.055){
 				if (nonDeadlyOverlays && !TemperatureDamageManager.isTakingTemperatureDamage) {
 					renderOverlay(drawContext, EXTREME_COLD_OVERLAY, 1.0f);
 				} else if (TemperatureDamageManager.isTakingTemperatureDamage && deadlyOverlays) {

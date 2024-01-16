@@ -1,4 +1,4 @@
-package com.pikachurro.wild_temperature.mixin;
+package site.keyschain.wild_temperature.mixin;
 
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;

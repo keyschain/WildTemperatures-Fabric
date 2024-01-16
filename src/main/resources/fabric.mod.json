@@ -5,25 +5,25 @@
 	"name": "Wild Temperatures",
 	"description": "A temperature mod expanding on vanilla mechanics to make the game a bit more difficult but doesn't require learning complex new mechanics!",
 	"authors": [
-		"pikachurro"
+		"keyschain"
 	],
 	"contact": {
-		"homepage": "https://pikachurro.xyz/#minecraft",
-		"sources": "https://github.com/pikachurr0/WildTemperatures",
-		"issues" : "https://github.com/pikachurr0/WildTemperatures/issues"
+		"homepage": "https://keyschain.site/#minecraft",
+		"sources": "https://github.com/pikachurr0/WildTemperatures-fabric",
+		"issues" : "https://github.com/pikachurr0/WildTemperatures-fabric/issues"
 	},
-	"license": "ARR",
+	"license": "GPL-3.0",
 	"icon": "assets/wild_temperature/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.pikachurro.wild_temperature.WildTemperature"
+			"site.keyschain.wild_temperature.WildTemperature"
 		],
 		"client": [
-			"com.pikachurro.wild_temperature.WildTemperatureClient"
+			"site.keyschain.wild_temperature.WildTemperatureClient"
 		],
 		"fabric-datagen": [
-			"com.pikachurro.wild_temperature.WildTemperatureDataGenerator"
+			"site.keyschain.wild_temperature.WildTemperatureDataGenerator"
 		]
 	},
 	"mixins": [

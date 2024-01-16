@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "com.pikachurro.wild_temperature.mixin",
+	"package": "site.keyschain.wild_temperature.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"ExampleMixin"

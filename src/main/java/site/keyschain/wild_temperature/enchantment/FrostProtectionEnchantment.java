@@ -1,4 +1,4 @@
-package com.pikachurro.wild_temperature;
+package site.keyschain.wild_temperature.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;

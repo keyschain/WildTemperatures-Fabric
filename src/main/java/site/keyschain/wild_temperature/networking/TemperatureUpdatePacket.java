@@ -1,14 +1,15 @@
-package com.pikachurro.wild_temperature;
+package site.keyschain.wild_temperature.networking;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import site.keyschain.wild_temperature.temperature.TemperatureManager;
 
 import java.util.UUID;
 
-import static com.pikachurro.wild_temperature.WildTemperature.MOD_ID;
+import static site.keyschain.wild_temperature.WildTemperature.MOD_ID;
 
 
 public class TemperatureUpdatePacket {
@@ -28,7 +29,7 @@ public class TemperatureUpdatePacket {
     }
 
     public static void send(ServerPlayerEntity player) {
-        float temperature = RefactoredTemperatureManager.playerTemperature;
+        float temperature = TemperatureManager.playerTemperature;
         TemperatureUpdatePacket packet = new TemperatureUpdatePacket(player.getUuid(), temperature);
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         TemperatureUpdatePacket.write(buf, packet);
