@@ -1,14 +1,13 @@
 package site.keyschain.wild_temperature.temperature;
 
+import net.minecraft.item.*;
 import site.keyschain.wild_temperature.enchantment.ModEnchantments;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterials;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import site.keyschain.wild_temperature.util.ModTags;
 
 public class EquipmentChecks {
     static boolean hasFireProtection(ServerPlayerEntity player) {
@@ -29,10 +28,11 @@ public class EquipmentChecks {
         return false;
     }
 
-    static boolean hasHeatProtectionArmor(ServerPlayerEntity player){
+
+    static boolean hasHeatProtectionArmor(ServerPlayerEntity player) {
         int count = 0;
         for (ItemStack armor : player.getArmorItems()) {
-            if (armor.getItem() instanceof ArmorItem && ((ArmorItem) armor.getItem()).getMaterial() == ArmorMaterials.CHAIN) {
+            if (armor.getItem() instanceof ArmorItem && armor.isIn(ModTags.Items.PROTECT_AGAINST_HEAT)) {
                 count++;
             }
         }
@@ -43,7 +43,7 @@ public class EquipmentChecks {
     static boolean hasColdProtectionArmor(ServerPlayerEntity player) {
         int count = 0;
         for (ItemStack armor : player.getArmorItems()) {
-            if (armor.getItem() instanceof ArmorItem && ((ArmorItem) armor.getItem()).getMaterial() == ArmorMaterials.LEATHER) {
+            if (armor.getItem() instanceof ArmorItem && armor.isIn(ModTags.Items.PROTECT_AGAINST_COLD)) {
                 count++;
             }
         }
